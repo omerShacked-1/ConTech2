@@ -11,48 +11,48 @@ namespace CONTECH2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly ConTechDBContext _context;
 
-        public UsersController(ConTechDBContext context)
+        public PostsController(ConTechDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Posts>>> GetPosts()
         {
-            return await _context.Users.Include(u=>u.UsersLabels).ToListAsync();
+            return await _context.Posts.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Posts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUsers(long id)
+        public async Task<ActionResult<Posts>> GetPosts(long id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var posts = await _context.Posts.FindAsync(id);
 
-            if (users == null)
+            if (posts == null)
             {
                 return NotFound();
             }
 
-            return users;
+            return posts;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Posts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(long id, Users users)
+        public async Task<IActionResult> PutPosts(long id, Posts posts)
         {
-            if (id != users.Id)
+            if (id != posts.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(users).State = EntityState.Modified;
+            _context.Entry(posts).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CONTECH2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsersExists(id))
+                if (!PostsExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace CONTECH2.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Posts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Users>> PostUsers(Users users)
+        public async Task<ActionResult<Posts>> PostPosts(Posts posts)
         {
-            _context.Users.Add(users);
+            _context.Posts.Add(posts);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (UsersExists(users.Id))
+                if (PostsExists(posts.Id))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace CONTECH2.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUsers", new { id = users.Id }, users);
+            return CreatedAtAction("GetPosts", new { id = posts.Id }, posts);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Posts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Users>> DeleteUsers(long id)
+        public async Task<ActionResult<Posts>> DeletePosts(long id)
         {
-            var users = await _context.Users.FindAsync(id);
-            if (users == null)
+            var posts = await _context.Posts.FindAsync(id);
+            if (posts == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
+            _context.Posts.Remove(posts);
             await _context.SaveChangesAsync();
 
-            return users;
+            return posts;
         }
 
-        private bool UsersExists(long id)
+        private bool PostsExists(long id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Posts.Any(e => e.Id == id);
         }
     }
 }

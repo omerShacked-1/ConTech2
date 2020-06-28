@@ -12,11 +12,13 @@
   <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
 </ul>
 <p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>-->
+  <div style="text-align:center">
+    <h1>ConTech</h1>
+    <h3>We Connect The World.</h3>
 
-<input type="text" placeholder="search?" [(ngModel)]="searchV"/>
-<button class="btn btn-primary" (click)="search()">GO</button>
-<ul>
-  <li *ngFor="let per of menList">
-    <label>{{per.name}}</label>
-  </li>
-</ul>
+    <select id="tags" required formControlName="name" style="width:30%; height:35px;">
+      <option *ngFor="let tag of tags">{{tag}}</option>
+    </select> 
+
+    <button class="btn btn-primary" (click)="search()">GO</button>
+  </div>

@@ -1,13 +1,29 @@
 <div class="container">
-  <div style="margin: auto; width: 50%; border: 1px solid grey; padding: 10px;"> 
-    <h1 style=" 
+  <div style="margin: auto; width: 50%; border: 1px solid grey; padding: 10px;">
+    <h1 style="
       font-family: 'Open Sans', sans-serif;
       font-weight: 300;
       line-height: 40px;
       margin: 0 0 16px;
       text-align:center;
-  ">Share your post.</h1>
-    <input placeholder="Enter" style="width:100%; height:100px;" type="text" />
-   </div>
+  ">
+      Share your post.
+    </h1>
+    <textarea style="width:100%" rows="5" placeholder="Enter text"></textarea>
+    <br />
+    <h6>Select a file:</h6>
+    <input type="file" />
+    <h6></h6>
+    <h6>Select relevant tags.</h6>
+    <form>
+      <div *ngFor="let tag of tags">
+        <input type="checkbox"> {{tag}}
+      </div>
+    </form>
+    <br />
+    <button class="btn btn-info box-shadow" type="submit">Upload</button>
+  </div>
+   
+
 
 </div>

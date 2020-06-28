@@ -11,48 +11,48 @@ namespace CONTECH2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TagsController : ControllerBase
+    public class LabelsController : ControllerBase
     {
-        private readonly conTechDBContext _context;
+        private readonly ConTechDBContext _context;
 
-        public TagsController(conTechDBContext context)
+        public LabelsController(ConTechDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tags
+        // GET: api/Labels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetTag()
+        public async Task<ActionResult<IEnumerable<Labels>>> GetLabels()
         {
-            return await _context.Tag.ToListAsync();
+            return await _context.Labels.ToListAsync();
         }
 
-        // GET: api/Tags/5
+        // GET: api/Labels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTag(long id)
+        public async Task<ActionResult<Labels>> GetLabels(long id)
         {
-            var tag = await _context.Tag.FindAsync(id);
+            var labels = await _context.Labels.FindAsync(id);
 
-            if (tag == null)
+            if (labels == null)
             {
                 return NotFound();
             }
 
-            return tag;
+            return labels;
         }
 
-        // PUT: api/Tags/5
+        // PUT: api/Labels/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(long id, Tag tag)
+        public async Task<IActionResult> PutLabels(long id, Labels labels)
         {
-            if (id != tag.Id)
+            if (id != labels.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tag).State = EntityState.Modified;
+            _context.Entry(labels).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CONTECH2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TagExists(id))
+                if (!LabelsExists(id))
                 {
                     return NotFound();
                 }
@@ -73,20 +73,20 @@ namespace CONTECH2.Controllers
             return NoContent();
         }
 
-        // POST: api/Tags
+        // POST: api/Labels
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag(Tag tag)
+        public async Task<ActionResult<Labels>> PostLabels(Labels labels)
         {
-            _context.Tag.Add(tag);
+            _context.Labels.Add(labels);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (TagExists(tag.Id))
+                if (LabelsExists(labels.Id))
                 {
                     return Conflict();
                 }
@@ -96,28 +96,28 @@ namespace CONTECH2.Controllers
                 }
             }
 
-            return CreatedAtAction("GetTag", new { id = tag.Id }, tag);
+            return CreatedAtAction("GetLabels", new { id = labels.Id }, labels);
         }
 
-        // DELETE: api/Tags/5
+        // DELETE: api/Labels/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Tag>> DeleteTag(long id)
+        public async Task<ActionResult<Labels>> DeleteLabels(long id)
         {
-            var tag = await _context.Tag.FindAsync(id);
-            if (tag == null)
+            var labels = await _context.Labels.FindAsync(id);
+            if (labels == null)
             {
                 return NotFound();
             }
 
-            _context.Tag.Remove(tag);
+            _context.Labels.Remove(labels);
             await _context.SaveChangesAsync();
 
-            return tag;
+            return labels;
         }
 
-        private bool TagExists(long id)
+        private bool LabelsExists(long id)
         {
-            return _context.Tag.Any(e => e.Id == id);
+            return _context.Labels.Any(e => e.Id == id);
         }
     }
 }
