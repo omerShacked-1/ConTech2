@@ -16,9 +16,11 @@
     <h1>ConTech</h1>
     <h3>We Connect The World.</h3>
 
-    <select id="tags" required formControlName="name" style="width:30%; height:35px;">
+    <!--<select id="tags" required formControlName="name" style="width:30%; height:35px;">
       <option *ngFor="let tag of tags">{{tag}}</option>
-    </select> 
-
+    </select>--> 
+    <div>
+      <li *ngFor="let tag of tags">{{tag.Id}}</li>
+    </div>
     <button class="btn btn-primary" (click)="search()">GO</button>
   </div>

@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { TagsService } from "../Services/TagsService";
+import {  HttpService } from '../http-service.service'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  constructor(private tagsService: TagsService) { }
-  tags = this.tagsService.getTags()
-  menList = [{ name: "omer" }, {name:"itay"}]
-  searchV: string = "";
+  constructor(private service: HttpService) { }
+  searchV: string = " ";
+  tags = this.service.getTags();
   search() {
     window.alert(this.searchV);
   }

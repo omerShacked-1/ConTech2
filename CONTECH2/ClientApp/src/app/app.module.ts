@@ -3,14 +3,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component'
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { TagsService } from "./Services/TagsService";
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { Config } from "protractor";
+import { HttpService } from './http-service.service';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { TagsService } from "./Services/TagsService";
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [TagsService],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

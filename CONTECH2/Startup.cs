@@ -1,4 +1,4 @@
-//using CONTECH2.Models;
+using CONTECH2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +27,7 @@ namespace CONTECH2
     .AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
-            //services.AddDbContext<ConTechDBContext>(x => x.UseSqlite(@"Data Source=C:\Users\User\ConTech\conTechDB.SQLITE3"));
+            services.AddDbContext<ConTechDBContext>(x => x.UseSqlite(@"Data Source=C:\Users\User\ConTech\conTechDB.db"));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
